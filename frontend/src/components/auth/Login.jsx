@@ -42,8 +42,8 @@ const Login = () => {
         toast.success(res.data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message);
+      console.error(error);
+      toast.error(error.response?.data?.message || "An error occurred");
     } finally {
       dispatch(setLoading(false));
     }
@@ -56,83 +56,91 @@ const Login = () => {
   }, [user, navigate]);
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
       <div className="flex items-center justify-center max-w-7xl mx-auto">
         <form
           onSubmit={submitHandler}
-          className="w-1/2 border border-gray-200 rounded-md p-4 my-10"
+          className="w-full max-w-md bg-white shadow-md rounded-lg p-6 my-10 border border-gray-200"
         >
-          <h1 className="font-bold text-xl mb-5">Login</h1>
-          <div className="my-2">
-            <Label>Email</Label>
+          <h1 className="text-2xl font-bold text-gray-800 mb-6">Login</h1>
+
+          <div className="mb-4">
+            <Label htmlFor="email">Email</Label>
             <Input
+              id="email"
               type="email"
               placeholder="patel@gmail.com"
               value={input.email}
               name="email"
               onChange={changeEventHandler}
+              className="mt-2"
             />
           </div>
 
-          <div className="my-2">
-            <Label>Password</Label>
+          <div className="mb-4">
+            <Label htmlFor="password">Password</Label>
             <Input
+              id="password"
               type="password"
               placeholder="*****"
               value={input.password}
               name="password"
               onChange={changeEventHandler}
+              className="mt-2"
             />
           </div>
 
-          <div className="flex items-center justify-between">
-            <RadioGroup className="flex items-center gap-4 my-5">
+          <div className="mb-6">
+            <Label>Role</Label>
+            <RadioGroup className="flex items-center gap-6 mt-2">
               <div className="flex items-center space-x-2">
                 <Input
                   type="radio"
+                  id="student"
                   name="role"
                   value="student"
                   checked={input.role === "student"}
                   onChange={changeEventHandler}
                   className="cursor-pointer"
                 />
-                <Label htmlFor="option-one">Student</Label>
+                <Label htmlFor="student">Student</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <Input
                   type="radio"
+                  id="recruiter"
                   name="role"
                   value="recruiter"
                   checked={input.role === "recruiter"}
                   onChange={changeEventHandler}
                   className="cursor-pointer"
                 />
-                <Label htmlFor="option-two">Recruiter</Label>
+                <Label htmlFor="recruiter">Recruiter</Label>
               </div>
             </RadioGroup>
           </div>
 
           {loading ? (
-            <Button className="w-full my-6 p-3 bg-blue-500 text-white">
+            <Button disabled className="w-full bg-blue-500 text-white py-3 rounded-md flex items-center justify-center">
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Kirpya Rukein
+              Logging in...
             </Button>
           ) : (
             <Button
               type="submit"
-              className="w-full my-6 p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-md"
             >
               Login
             </Button>
           )}
 
-          <span className="text-sm">
+          <p className="text-sm text-gray-500 text-center mt-4">
             Don't have an account?{" "}
             <Link to="/signup" className="text-blue-600">
-              Signup
+              Sign up
             </Link>
-          </span>
+          </p>
         </form>
       </div>
     </div>
