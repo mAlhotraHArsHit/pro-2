@@ -35,9 +35,9 @@ const Navbar = () => {
     <div className="bg-[#e3edf7] shadow-sm border-b">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
         {/* Logo Section */}
-        <div>
+        <div className="flex items-center space-x-3">
           <h1 className="text-2xl font-bold text-gray-800">
-            Job<span className="text-[#6C63FF]">Portal</span>
+            <span className="text-[#6C63FF]">Job</span> Portal
           </h1>
         </div>
 
@@ -96,17 +96,17 @@ const Navbar = () => {
 
           {/* Authentication Section */}
           {!user ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center space-x-3">
               <Link to="/login">
                 <Button
                   variant="outline"
-                  className="text-[#6C63FF] border-[#6C63FF] hover:bg-blue-50 hover:text-blue-700"
+                  className="text-[#6C63FF] border-[#6C63FF] hover:bg-blue-50 hover:text-blue-700 transition-all"
                 >
                   Login
                 </Button>
               </Link>
               <Link to="/signup">
-                <Button className="bg-[#6C63FF] hover:bg-blue-800 text-white">
+                <Button className="bg-[#6C63FF] hover:bg-blue-800 text-white transition-all">
                   Signup
                 </Button>
               </Link>
@@ -126,8 +126,8 @@ const Navbar = () => {
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent className="w-80 m-3 bg-white shadow-lg rounded-md border border-gray-200">
-                <div className="flex gap-2 p-4">
-                  <Avatar className="h-10 w-10 rounded-full">
+                <div className="flex gap-2 space-y-2 p-4">
+                  <Avatar className="h-10 w-10 rounded-full cursor-pointer">
                     <AvatarImage
                       src={user?.profile?.profilePhoto}
                       alt="@user"
